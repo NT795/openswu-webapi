@@ -56,7 +56,7 @@ public class HistoryLookuper extends AbsLibraryLookuper {
                 && press.find(author.end())
                 && time.find(press.end())) {
 
-            historyList.add(new History(name.group(1), author.group(1), press.group(1), time.group(1)));
+            historyList.add(new History(name.group(1), press.group(1), author.group(1), time.group(1)));
         }
 
 
