@@ -1,6 +1,7 @@
 package cn.swu.edu.opensource.openswu_webapi_jersey.library;
 
 import cn.swu.edu.opensource.openswu_webapi_jersey.constant.Constant;
+import cn.swu.edu.opensource.openswu_webapi_jersey.exceptions.ParameterException;
 import cn.swu.edu.opensource.openswu_webapi_jersey.interfaces.Lookup;
 import cn.swu.edu.opensource.openswu_webapi_jersey.interfaces.Parameter;
 import cn.swu.edu.opensource.openswu_webapi_jersey.utils.Client;
@@ -29,15 +30,16 @@ public abstract class AbsLibraryLookuper implements Lookup{
         nameValuePairs.add(new BasicNameValuePair("username",libraryParameter.getSwuID()));
         nameValuePairs.add(new BasicNameValuePair("password",libraryParameter.getPassword()));
         nameValuePairs.add(new BasicNameValuePair("refer","space.jsp?do=home"));
-        nameValuePairs.add(new BasicNameValuePair("loginsubmit",""));
+        nameValuePairs.add(new BasicNameValuePair("loginsubmit", "%B5%C7%C2%BC"));
         nameValuePairs.add(new BasicNameValuePair("formhash","a476d524"));
-        nameValuePairs.add(new BasicNameValuePair("backUrl",""));
-
 
         Client client = new Client();
-        String res;
-        res = client.doPost(Constant.urlLibrary,nameValuePairs);
-        System.out.println(res);
+        String res = client.doPost(Constant.urlLibrary, nameValuePairs);
+
+        if (res.contains("对不起,登录失败,请重新登录")) {
+            throw new ParameterException("Invalid username or password");
+        }
+
         return client;
     }
 

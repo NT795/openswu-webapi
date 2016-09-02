@@ -32,6 +32,6 @@ public class LibraryParameter implements Parameter {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "swuID : " + this.getSwuID() + " password : " + this.getPassword();
     }
 }

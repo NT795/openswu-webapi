@@ -2,8 +2,8 @@ package cn.swu.edu.opensource.openswu_webapi_jersey.main;
 
 import cn.swu.edu.opensource.openswu_webapi_jersey.exceptions.ParameterException;
 import cn.swu.edu.opensource.openswu_webapi_jersey.interfaces.Lookup;
-import cn.swu.edu.opensource.openswu_webapi_jersey.library.BorrowInfo;
-import cn.swu.edu.opensource.openswu_webapi_jersey.library.History;
+import cn.swu.edu.opensource.openswu_webapi_jersey.library.BorrowInfoLookuper;
+import cn.swu.edu.opensource.openswu_webapi_jersey.library.HistoryLookuper;
 import cn.swu.edu.opensource.openswu_webapi_jersey.library.LibraryParameter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,7 +23,6 @@ import javax.ws.rs.core.MediaType;
 public class Library {
 
     @PathParam("module")
-    @DefaultValue("borrowInfo")
     String module;
 
     // 简单的策略模式,Lookup是实现查询的顶层接口
@@ -35,12 +34,14 @@ public class Library {
     @Produces(MediaType.TEXT_PLAIN)
     public String getIt(LibraryParameter libraryParameter) {
 
+        LOGGER.info("Library : " + libraryParameter.toString());
+        // FIXME this module have some problem in performance.
         switch (module) {
             case "borrowInfo":
-                lookup = new BorrowInfo();
+                lookup = new BorrowInfoLookuper();
                 break;
             case "history":
-                lookup = new History();
+                lookup = new HistoryLookuper();
                 break;
             default:
                 throw new ParameterException("the path /"+ module+" is wrong.");

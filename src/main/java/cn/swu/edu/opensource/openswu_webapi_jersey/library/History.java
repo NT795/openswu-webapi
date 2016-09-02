@@ -1,21 +1,56 @@
 package cn.swu.edu.opensource.openswu_webapi_jersey.library;
 
-import cn.swu.edu.opensource.openswu_webapi_jersey.interfaces.Lookup;
-import cn.swu.edu.opensource.openswu_webapi_jersey.interfaces.Parameter;
-import cn.swu.edu.opensource.openswu_webapi_jersey.utils.Client;
-
 /**
- * Created by 西南大学开源协会 陈思定  on 2016/8/23.
+ * Created by 西南大学开源协会 陈思定  on 2016/9/2.
  * <p>
  * Email : sidingchan@gmail.com
  */
-public class History extends AbsLibraryLookuper {
+public class History {
+    // 书名
+    private String name;
+    // 作者
+    private String author;
+    // 出版社
+    private String press;
+    // 处理时间
+    private String time;
 
-    private Client client;
+    public History(String name, String author, String press, String time) {
+        this.name = name;
+        this.author = author;
+        this.press = press;
+        this.time = time;
+    }
 
-    @Override
-    public String lookup(Parameter parameter) {
-        loginInLibrarySystem(parameter);
-        return "finish lookup";
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getPress() {
+        return press;
+    }
+
+    public void setPress(String press) {
+        this.press = press;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
