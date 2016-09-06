@@ -12,10 +12,21 @@ public class EcardParameter implements Parameter {
     private String cardno;
     private String password;
 
-    //默认不查询个人信息
+    // 默认不查询个人信息
     private Boolean personal = false;
+    // 默认查询校园卡信息方式为全部页查询
+    private Boolean firstPage = false;
+
+    public Boolean getFirstPage() {
+        return firstPage;
+    }
+
+    public void setFirstPage(Boolean firstPage) {
+        this.firstPage = firstPage;
+    }
 
     public Boolean getPersonal() {
+
         return personal;
     }
 

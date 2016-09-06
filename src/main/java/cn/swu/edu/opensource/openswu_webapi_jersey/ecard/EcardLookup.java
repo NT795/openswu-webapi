@@ -1,9 +1,9 @@
 package cn.swu.edu.opensource.openswu_webapi_jersey.ecard;
 
 import cn.swu.edu.opensource.openswu_webapi_jersey.constant.Constant;
-import cn.swu.edu.opensource.openswu_webapi_jersey.utils.Client;
 import cn.swu.edu.opensource.openswu_webapi_jersey.interfaces.Lookup;
 import cn.swu.edu.opensource.openswu_webapi_jersey.interfaces.Parameter;
+import cn.swu.edu.opensource.openswu_webapi_jersey.utils.Client;
 import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
@@ -57,9 +57,14 @@ public class EcardLookup implements Lookup {
         if (pageMatcher.find()) {
             offset = Integer.valueOf(pageMatcher.group(1));
         }
-        for (; offset > 0; offset--) {
+        if (ecardParam.getFirstPage()) {
             String financeUrl = Constant.urlEcardFinance + "?offset=" + offset;
             financePageParse(client.doGet(financeUrl));
+        } else {
+            for (; offset > 0; offset--) {
+                String financeUrl = Constant.urlEcardFinance + "?offset=" + offset;
+                financePageParse(client.doGet(financeUrl));
+            }
         }
 
         //对消费记录按时间排序
