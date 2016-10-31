@@ -62,25 +62,36 @@ public class QuitNet {
 
     }
 
-    /*
-     *  谁做的这个退网的系统,真的是脑子有屎。
-     *  为了解决蛋疼的编码问题，这里直接用相应的长度来判断发生的响应情况，并返回给用户合理的应答。
-     *  一般来说：
-     *  1.正确退网长度应该为800+
-     *  2.账号没有登陆长度500-
-     *
-     * @param 退网时信息中心返回的应答。
-     * @return 我们返回给调用者的应答。
+//    /*
+//     *  谁做的这个退网的系统,真的是脑子有屎。
+//     *  为了解决蛋疼的编码问题，这里直接用相应的长度来判断发生的响应情况，并返回给用户合理的应答。
+//     *  一般来说：
+//     *  1.正确退网长度应该为800+
+//     *  2.账号没有登陆长度500-
+//     *
+//     * @param 退网时信息中心返回的应答。
+//     * @return 我们返回给调用者的应答。
+//     */
+//    private String getResponse(String response){
+//        int length = response.length();
+//
+//        System.out.println("res "+ response);
+//        if(length>800)
+//            return "退网成功。";
+//        else if(length>700)
+//            return "用户名或密码错误。";
+//        else
+//            return "您的账户当前没有登陆。";
+//
+//    }
+
+    /**
+     * 新退网系统没有办法通过回应判断是否断网成功,所以暂时直接返回断网成功把。
+     * FIXME
+     * @param response
+     * @return
      */
     private String getResponse(String response){
-        int length = response.length();
-
-        if(length>800)
-            return "退网成功。";
-        else if(length>700)
-            return "用户名或密码错误。";
-        else
-            return "您的账户当前没有登陆。";
-
+        return "断网成功。";
     }
 }

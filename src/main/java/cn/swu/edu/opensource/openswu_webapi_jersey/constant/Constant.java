@@ -68,6 +68,10 @@ public class Constant {
     public static final String urlBorrowInfo = "http://mylib.swu.edu.cn/borry.jsp?ac=borryInofor";
     // 图书馆借阅历史
     public static final String urlHistory = "http://mylib.swu.edu.cn/borry.jsp?ac=userHistory";
+    // 校园网自助服务（退网需要先进入这里）
+    public static final String urlSelfServiceNetwork = "http://service2.swu.edu.cn/selfservice/module/scgroup/web/login_judge.jsf";
+
+    public static final String urlNewQuitNet = "http://service2.swu.edu.cn/selfservice/module/userself/web/userself_ajax.jsf?methodName=indexBean.kickUserBySelfForAjax";
 
 }
 

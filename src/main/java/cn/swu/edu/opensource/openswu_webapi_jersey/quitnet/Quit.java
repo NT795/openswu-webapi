@@ -19,12 +19,37 @@ public class Quit {
 
     private String response;
 
+    private Client client;
+//    public void doQuit(String username,String password){
+//        List<NameValuePair> entries = new ArrayList<>();
+//        entries.add(new BasicNameValuePair("username", username));
+//        entries.add(new BasicNameValuePair("password", password));
+//
+//        this.response = new Client().doPost(Constant.urlQuitNet,entries);
+//    }
+
+    private static final String urlOnlineDevice = "http://service2.swu.edu.cn/selfservice/module/webcontent/web/onlinedevice_list.jsf";
+
+    public Quit() {
+        this.client = new Client();
+    }
+
+    // TODO 需要重构doQuit()方法，以应对退网系统的修改
     public void doQuit(String username,String password){
         List<NameValuePair> entries = new ArrayList<>();
-        entries.add(new BasicNameValuePair("username", username));
+        entries.add(new BasicNameValuePair("name", username));
         entries.add(new BasicNameValuePair("password", password));
 
-        this.response = new Client().doPost(Constant.urlQuitNet,entries);
+        String res = client.doPost(Constant.urlSelfServiceNetwork, entries);
+
+//        System.out.println("inself"+ res);
+        client.doGet(urlOnlineDevice);
+        List<NameValuePair> quitEntries = new ArrayList<>();
+        quitEntries.add(new BasicNameValuePair("key", username + ":10.60.0.73"));
+
+        this.response = this.client.doPost(Constant.urlNewQuitNet, quitEntries);
+
+
     }
 
     public String getResponse(){
